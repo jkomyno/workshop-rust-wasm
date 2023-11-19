@@ -1,0 +1,18 @@
+[package]
+name = "w6-error-handling"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+# `cdylib` enables `wasm32-*` compilation.
+crate-type = ["cdylib"]
+
+[dependencies]
+js-sys = { workspace = true }
+serde = { workspace = true }
+serde-wasm-bindgen = { workspace = true }
+serde_json = { workspace = true }
+tsify = { workspace = true }
+wasm-bindgen = { workspace = true }
+
+js-error-macros = { path = "../../utils/js-error-macros" }

@@ -1,0 +1,27 @@
+{
+  "name": "@jkomyno/rustlab-2023",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:ci": "pnpm test -- run",
+    "build": "node --no-warnings ./build.mjs",
+    "dev": "node --no-warnings --import tsx/esm --experimental-wasm-modules"
+  },
+  "devDependencies": {
+    "@types/node": "^20.4.2",
+    "esbuild": "^0.19.5",
+    "esbuild-plugin-wasm": "^1.1.0",
+    "esbuild-register": "^3.5.0",
+    "glob": "^10.3.10",
+    "tsx": "^3.13.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.11",
+    "vite-plugin-node": "^3.1.0",
+    "vite-plugin-wasm": "^3.2.2"
+  },
+  "dependencies": {
+    "vitest": "^0.32.4"
+  }
+}

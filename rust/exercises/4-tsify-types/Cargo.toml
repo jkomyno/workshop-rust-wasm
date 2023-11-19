@@ -1,0 +1,15 @@
+[package]
+name = "w4-tsify-types"
+version = "0.1.0"
+edition = "2021"
+authors = ["Alberto Schiabel <alberto.schiabel@gmail.com>"]
+
+[lib]
+# `cdylib` enables `wasm32-*` compilation.
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen.workspace = true
+tsify.workspace = true
+serde.workspace = true
+js-sys.workspace = true

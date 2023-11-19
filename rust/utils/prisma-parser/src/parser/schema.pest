@@ -1,0 +1,85 @@
+// This is how PEG grammars work:
+// https://pest.rs/book/grammars/peg.html
+
+// This is the basic syntax of Pest grammar files:
+// https://pest.rs/book/grammars/syntax.html#cheat-sheet
+
+// ######################################
+// Schema - the root of all rules
+// ######################################
+schema = {
+    SOI
+    ~ (config_block | arbitrary_block | comment_block | empty_lines | CATCH_ALL)*
+    ~ EOI
+    }
+
+config_block = {
+    DATASOURCE_KEYWORD
+    ~ identifier
+    ~ BLOCK_OPEN
+    ~ config_contents
+    ~ BLOCK_CLOSE
+    }
+
+// a block definition without a keyword. Is not valid.
+// It just acts as a catch for the parser to display a nice error.
+arbitrary_block = { identifier ~ BLOCK_OPEN ~ ((!BLOCK_CLOSE ~ ANY) | NEWLINE)* ~ BLOCK_CLOSE }
+
+key_value = { identifier ~ "=" ~ expression? ~ trailing_comment? }
+
+config_contents = {
+    ((key_value ~ NEWLINE) | comment_block | empty_lines| BLOCK_LEVEL_CATCH_ALL)*
+}
+
+// ######################################
+// Arguments
+// ######################################
+arguments_list = { "(" ~ (argument ~ ("," ~ argument)*)? ~ ")" }
+argument = _{ expression }
+
+// ######################################
+// Comments and Documentation Comments
+// ######################################
+comment_block = ${ ((doc_comment | comment) ~ NEWLINE?)+ }
+trailing_comment = ${ doc_comment | comment }
+doc_comment = { WHITESPACE* ~ "///" ~ doc_content }
+comment = { WHITESPACE* ~ (!"///") ~ "//" ~ doc_content }
+doc_content = @{ (!NEWLINE ~ ANY)* }
+
+// ######################################
+// shared building blocks
+// ######################################
+
+identifier = @{ ASCII_ALPHANUMERIC ~ ( "_" | "-" | ASCII_ALPHANUMERIC)* }
+
+WHITESPACE = _{ SPACE_SEPARATOR | "\t" } // tabs are also whitespace
+NEWLINE = _{ "\n" | "\r\n" | "\r" }
+empty_lines = @{ (WHITESPACE* ~ NEWLINE)+ }
+
+// the any part is to not crash on comments next to an open block, see test `parse_comments_without_crasing_or_loosing_info`
+BLOCK_OPEN = { "{" ~ (!NEWLINE ~ ANY)* ~ NEWLINE }
+BLOCK_CLOSE = { "}" }
+
+DATASOURCE_KEYWORD = { "datasource" }
+
+CATCH_ALL = { (!NEWLINE ~ ANY)+ ~ NEWLINE? }
+BLOCK_LEVEL_CATCH_ALL = { !BLOCK_CLOSE ~ CATCH_ALL }
+
+// ######################################
+// Expressions & Functions
+// ######################################
+function_call = { arguments_list }
+expression = { function_call | string_literal }
+
+// ######################################
+// Literals / Values
+// ######################################
+
+// String literals. We follow exactly the same grammar as JSON strings
+// References:
+// - https://datatracker.ietf.org/doc/html/rfc8259
+// - https://www.json.org/json-en.html
+ASCII_CONTROL_CHARACTER = _{ '\u{0000}'..'\u{001F}' }
+string_escape = _{ "\\" ~ ANY }
+string_content = @{ (string_escape | !("\"" | ASCII_CONTROL_CHARACTER) ~ ANY)* }
+string_literal = ${ "\"" ~ string_content ~ "\"" }

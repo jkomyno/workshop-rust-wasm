@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  workspace:
+    build: .
+    volumes:
+      - '.:/app'
+    stdin_open: true
+    tty: true

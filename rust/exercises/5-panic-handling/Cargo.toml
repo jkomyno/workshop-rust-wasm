@@ -1,0 +1,15 @@
+[package]
+name = "w5-panic-handling"
+version = "0.1.0"
+edition = "2021"
+authors = ["Alberto Schiabel <alberto.schiabel@gmail.com>"]
+
+[lib]
+# `cdylib` enables `wasm32-*` compilation.
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen.workspace = true
+js-sys.workspace = true
+wasm-rs-dbg.workspace = true
+once_cell = "1.18.0"

@@ -1,0 +1,17 @@
+[package]
+name = "w7-demo-psl-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = { workspace = true }
+serde = { workspace = true }
+serde-wasm-bindgen = { workspace = true }
+tsify = { workspace = true }
+js-sys = { workspace = true }
+prisma-language = { path = "../../utils/prisma-language" }
+
+js-error-macros = { path = "../../utils/js-error-macros" }

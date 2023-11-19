@@ -1,0 +1,40 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "Node.js + Rust + WebAssembly",
+  "dockerFile": "../Dockerfile",
+
+  // Use 'settings' to set *default* container specific settings.json values on container create.
+  // You can edit these settings after create using settings.json.
+  "settings": { 
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "rust-analyzer.cargo-watch.enable": false,
+    "editor.defaultFormatter": "matklad.rust-analyzer",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "javascript.format.enable": false,
+    "typescript.format.enable": false
+  },
+
+  // Specifies a command that should be run when the container is created.
+  // "postCreateCommand": "yarn install",
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [],
+
+  // Use 'remoteUser' to specify the user you'll be working as. 
+  // This defaults to 'vscode' if not specified.
+  "remoteUser": "node",
+
+  // Specify the extensions the container needs installed.
+  // "extensions": [
+  //   "dbaeumer.vscode-eslint",
+  //   "matklad.rust-analyzer",
+  //   "vadimcn.vscode-lldb",
+  //   "ms-vscode.node-debug2",
+  //   "webfreak.debug"
+  // ],
+
+  // Uncomment the next line to run commands after the container is created.
+  // "postCreateCommand": "yarn install",
+}
