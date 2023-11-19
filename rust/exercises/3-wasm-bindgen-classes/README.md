@@ -20,7 +20,7 @@ For example, consider a scenario in which a JavaScript wants to use a Rust date-
 ```typescript
 const date = new wasm.Date(2023, 11, 18) // year, month, day
 console.log(date.fmt_italian()) // prints "18/11/2023", in "DD/mm/YYYY" format
-// console.log(date.next_year()) // increments the year 
+// console.log(date.next_year()) // increments the year
 ```
 
 In pure Rust, we could write this as:
@@ -60,13 +60,13 @@ pub struct Date {
 
 + #[wasm_bindgen]
 impl Date {
-    + #[wasm_bindgen(constructor)]
++   #[wasm_bindgen(constructor)]
     pub fn new(year: u16, month: u8, day: u8) -> Self {
         Self { year, month, day }
     }
 
     // Returns the date in "DD/mm/YYYY" format
-    + #[wasm_bindgen]
++   #[wasm_bindgen]
     pub fn fmt_italian(&self) -> String {
         format!("{:02}/{:02}/{:04}", &self.day, &self.month, &self.year)
     }
