@@ -1,5 +1,3 @@
-(KEEP)
-
 # 1 - Wasm Preliminaries & Playground Setup
 
 ## 1.1 WebAssembly: intro

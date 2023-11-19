@@ -95,6 +95,7 @@ docker compose run --build --rm -it workspace
 - ➡️ [`4-tsify-types`](./rust/exercises/4-tsify-types/README.md)
 - ➡️ [`5-panic-handling`](./rust/exercises/5-panic-handling/README.md)
 - ➡️ [`6-error-handling`](./rust/exercises/6-error-handling/README.md)
+- ➡️ Demo
 
 This is a work in progress, so stay tuned for more chapters about:
 - `async / await` support

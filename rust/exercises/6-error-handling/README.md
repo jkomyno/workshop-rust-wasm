@@ -127,5 +127,5 @@ We have learnt that the error handling ergonomics of JavaScript are radically di
 
 ---
 
-| [⬅️ 5 - Panic handling](../5-panic-handling/README.md) | [🏠](/README.md)| [Demo ➡️](../7-demo/README.md)|
+| [⬅️ 5 - Panic handling](../5-panic-handling/README.md) | [🏠](/README.md)| [Demo ➡️](../7-demo/)|
 |:--------------|:------:|------------------------------------------------:|
